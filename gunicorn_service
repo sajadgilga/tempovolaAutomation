@@ -1,0 +1,18 @@
+"[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=username
+Group=www-data
+WorkingDirectory=/path/to/project
+ExecStart=/path/to/project/venv/bin/gunicorn \
+        --access-logfile - \
+        --workers 9 \
+        --bind unix:/run/gunicorn.sock \
+        TempoVola.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+"

@@ -1,0 +1,15 @@
+"server {
+    listen 8000;
+    server_name server_ip_or_domain;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    #location /static/ {
+     #   root /home/sammy/myproject;
+    #}
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+"
